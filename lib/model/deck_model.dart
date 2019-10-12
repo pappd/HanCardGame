@@ -1,25 +1,22 @@
 import 'package:card_game/model/card_model.dart';
+import 'package:card_game/model/card_types_model.dart';
 
 ///Representation of the deck
 class DeckModel {
-  ///Definition for card types
-  ///
-  ///First index refer to color
-  ///second index refer to value
-  final List<List<int>> _cardTypes;
-
   ///Cards in the deck
   final List<CardModel> _cards = [];
 
-  ///Construct a sorted deck with all kind of [_cardType]
+  ///Construct a sorted deck with all kind of card type
   ///
-  ///Every card type is existing in the deck as many times as it is defined in [_cardType]
-  DeckModel(this._cardTypes) {
-    for (var colorIndex = 0; colorIndex < _cardTypes.length; colorIndex++) {
-      for (var cardValue = 1;
-          cardValue < _cardTypes[colorIndex].length + 1;
-          cardValue++) {
-        for (var i = 0; i < _cardTypes[colorIndex][cardValue]; i++) {
+  ///Every card type is existing in the deck as many times as it is defined in [cardTypes]
+  DeckModel(CardTypesModel cardTypes) {
+    for (var colorIndex = 0;
+        colorIndex < cardTypes.colors.length;
+        colorIndex++) {
+      for (var cardValue = 1; cardValue < cardTypes.topValue + 1; cardValue++) {
+        for (var i = 0;
+            i < cardTypes.distribution[colorIndex][cardValue];
+            i++) {
           _cards.add(CardModel(colorIndex: colorIndex, value: cardValue));
         }
       }
