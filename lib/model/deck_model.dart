@@ -13,11 +13,11 @@ class DeckModel {
     for (var colorIndex = 0;
         colorIndex < cardTypes.colors.length;
         colorIndex++) {
-      for (var cardValue = 1; cardValue < cardTypes.topValue + 1; cardValue++) {
+      for (var cardValue = 0; cardValue < cardTypes.topValue; cardValue++) {
         for (var i = 0;
             i < cardTypes.distribution[colorIndex][cardValue];
             i++) {
-          _cards.add(CardModel(colorIndex: colorIndex, value: cardValue));
+          _cards.add(CardModel(colorIndex: colorIndex, value: cardValue + 1));
         }
       }
     }
