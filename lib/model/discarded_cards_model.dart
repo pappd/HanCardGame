@@ -28,9 +28,9 @@ class DiscardedCardsModel {
     _cards[card.colorIndex][card.value - 1] += 1;
   }
 
-  ///It is true if every instance of this card has been discarded
-  bool isDiscarded(CardModel card) =>
-      _cards[card.colorIndex][card.value - 1] == 0;
+  ///It is discribe how many piceces of the given car are missing from the deck
+  int numberDiscarded(CardModel card) =>
+      _cards[card.colorIndex][card.value - 1];
 
   ///Getter for[_cards]
   List<List<int>> get cardsInDeck => _cards;
