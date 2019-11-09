@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 ///Definition for card types
 class CardTypesModel {
   ///Default Colors for index
-  static const defaultColors = [
-    Colors.accents,
+  static const defaultColors = <Color>[
     Colors.amber,
     Colors.red,
     Colors.greenAccent,
@@ -20,7 +19,7 @@ class CardTypesModel {
   final List<List<int>> _distribution = [];
 
   ///Specified colors for index
-  final List<Colors> _colors = [];
+  final List<Color> _colors = [];
 
   ///Highest possible number on the card
   final int topValue;
@@ -38,7 +37,7 @@ class CardTypesModel {
   ///Three Red2 card,
   ///Three Red3 card,
   ///One Red4 card
-  void addColor(List<int> vmi, {Colors color}) {
+  void addColor(List<int> vmi, {Color color}) {
     assert(vmi.length <= topValue);
     assert(_colors.length < defaultColors.length);
     _distribution.add(vmi);
@@ -46,7 +45,7 @@ class CardTypesModel {
   }
 
   ///Get [_colors]
-  List<Colors> get colors => _colors;
+  List<Color> get colors => _colors;
 
   ///Get [_distribution]
   List<List<int>> get distribution => _distribution;

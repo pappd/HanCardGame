@@ -14,9 +14,9 @@ class HeardInfoModel {
   ///there is no any heard information about the card by the other players
   HeardInfoModel(CardTypesModel cardTypes)
       : possibleColors = [
-          for (var i = 0; i < cardTypes.colors.length; i++) false
+          for (var i = 0; i < cardTypes.colors.length; i++) true
         ],
-        possibleValues = [for (var i = 0; i < cardTypes.topValue; i++) false];
+        possibleValues = [for (var i = 0; i < cardTypes.topValue; i++) true];
 
   ///Record the color information, that was said about the card by the other players
   ///
@@ -49,12 +49,12 @@ class HeardInfoModel {
   }
 
   ///Get the indices of non possible colors
-  List<int> get nonPossibleColors =>
-      List.generate(possibleColors.length, (i) => !possibleColors[i] ? i : -1)
-        ..removeWhere((i) => i == -1);
+  List<int> getColors(bool possible) => List.generate(
+      possibleColors.length, (i) => (!possible) ^ possibleColors[i] ? i : -1)
+    ..removeWhere((i) => i == -1);
 
   ///Get the indices of non possible values
-  List<int> get nonPossibleValuesIndices =>
-      List.generate(possibleValues.length, (i) => !possibleValues[i] ? i : -1)
-        ..removeWhere((i) => i == -1);
+  List<int> getValues(bool possible) => List.generate(
+      possibleValues.length, (i) => (!possible) ^ possibleValues[i] ? i : -1)
+    ..removeWhere((i) => i == -1);
 }

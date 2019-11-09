@@ -34,11 +34,11 @@ class DiscardedCardsModel {
       possibleCard[card.colorIndex][card.value - 1] -= 1;
     }
 
-    for (var c in heardInfo.nonPossibleColors) {
+    for (var c in heardInfo.getColors(false)) {
       possibleCard[c].forEach((e) => e = 0);
     }
 
-    for (var v in heardInfo.nonPossibleValuesIndices) {
+    for (var v in heardInfo.getValues(false)) {
       for (var c in possibleCard) {
         c[v] = 0;
       }
