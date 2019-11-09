@@ -30,7 +30,9 @@ class DeckModel {
   ///
   ///Get the last card from the deck
   ///wich is removing from the deck
-  CardModel draw() => _cards.removeLast();
+  CardModel draw() => _cards.isNotEmpty
+      ? _cards.removeLast()
+      : CardModel(colorIndex: 0, value: -1);
 
   ///Number of the reaming cards in the deck
   int get length => _cards.length;
