@@ -5,10 +5,10 @@ import 'package:card_game/model/card_types_model.dart';
 import 'package:card_game/model/deck_model.dart';
 import 'package:card_game/model/discarded_cards_model.dart';
 import 'package:card_game/model/heard_info_model.dart';
-import 'package:card_game/model/player.dart';
+import 'package:card_game/model/player_model.dart';
 import 'package:card_game/model/scored_card_model.dart';
 
-class Board {
+class BoardModel {
   final int playersNumber;
   final int cardsInHandNumber;
   final int maxHelpToken;
@@ -18,16 +18,17 @@ class Board {
   final DeckModel deck;
   final DiscardedCardsModel discardedCards;
   ScoredCardModel scoredCard;
-  final List<Player> players;
+  final List<PlayerModel> players;
 
   var activePlayerId = 0;
 
-  Board(this.playersNumber, this.cardsInHandNumber, this.cardTypes,
+  BoardModel(this.playersNumber, this.cardsInHandNumber, this.cardTypes,
       {this.lifeToken = 3, this.maxHelpToken = 10})
       : deck = DeckModel(cardTypes),
         helpToken = maxHelpToken,
         discardedCards = DiscardedCardsModel(cardTypes),
-        players = List<Player>.generate(playersNumber, (i) => Player(i)) {
+        players =
+            List<PlayerModel>.generate(playersNumber, (i) => PlayerModel(i)) {
     scoredCard = ScoredCardModel(cardTypes,
         wrongCardWasAdded: loseLife,
         colorCompleted: () => helpToken = min(maxHelpToken, helpToken + 1));
