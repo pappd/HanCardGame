@@ -47,4 +47,14 @@ class HeardInfoModel {
     }
     possibleValues[index] = isValid;
   }
+
+  ///Get the indices of non possible colors
+  List<int> get nonPossibleColors =>
+      List.generate(possibleColors.length, (i) => !possibleColors[i] ? i : -1)
+        ..removeWhere((i) => i == -1);
+
+  ///Get the indices of non possible values
+  List<int> get nonPossibleValuesIndices =>
+      List.generate(possibleValues.length, (i) => !possibleValues[i] ? i : -1)
+        ..removeWhere((i) => i == -1);
 }

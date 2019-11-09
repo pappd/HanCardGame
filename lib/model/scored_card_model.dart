@@ -50,6 +50,17 @@ class ScoredCardModel {
   ///Getter for[_scores]
   List<int> get scores => _scores;
 
+  ///Getter for every scored card
+  List<CardModel> get cards {
+    var cards = <CardModel>[];
+    for (var color = 0; color < _scores.length; color++) {
+      for (var value = 1; value <= _scores[color]; value++) {
+        cards.add(CardModel(colorIndex: color, value: value));
+      }
+    }
+    return cards;
+  }
+
   ///Current score of the game
   int get scoreResult => _scores.reduce((a, b) => a + b);
 }
