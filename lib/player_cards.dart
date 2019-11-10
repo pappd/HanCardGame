@@ -1,4 +1,5 @@
 import 'package:card_game/model/board_model.dart';
+import 'package:card_game/model/card_model.dart';
 import 'package:flutter/material.dart';
 import 'card.dart' as game;
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -85,40 +86,56 @@ class PlayerCards extends StatelessWidget {
                           Flexible(flex: 1, child: SizedBox.expand()),
                           Flexible(
                             flex: 20,
-                            child: Dismissible(
-                              direction: DismissDirection.vertical,
-                              key: GlobalKey(),
-                              onDismissed: (direction) => board.put(playerId, i,
-                                  fold: direction == DismissDirection.down),
-                              background: Container(
-                                alignment: Alignment.topCenter,
-                                color: Colors.red,
-                                child: FittedBox(
-                                  child: Text(
-                                    "Discard",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 36),
+                            child: board.activePlayerId != myId ||
+                                    myId != playerModel.id
+                                ? game.Card(
+                                    card: playerModel.id == myId
+                                        ? board.knownInfo(myId, i).length == 1
+                                            ? board.knownInfo(myId, i).first
+                                            : null
+                                        : playerModel.cards[i],
+                                    info: playerModel.heardInfo?.elementAt(i),
+                                  )
+                                : Dismissible(
+                                    direction: DismissDirection.vertical,
+                                    key: GlobalKey(),
+                                    onDismissed: (direction) => board.put(
+                                        playerId, i,
+                                        fold:
+                                            direction == DismissDirection.down),
+                                    background: Container(
+                                      alignment: Alignment.topCenter,
+                                      color: Colors.red,
+                                      child: FittedBox(
+                                        child: Text(
+                                          "Discard",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 36),
+                                        ),
+                                      ),
+                                    ),
+                                    secondaryBackground: Container(
+                                      alignment: Alignment.bottomCenter,
+                                      color: Colors.red,
+                                      child: FittedBox(
+                                        child: Text(
+                                          "Put",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 36),
+                                        ),
+                                      ),
+                                    ),
+                                    child: game.Card(
+                                      card: playerModel.id == myId
+                                          ? board.knownInfo(myId, i).length == 1
+                                              ? board.knownInfo(myId, i).first
+                                              : null
+                                          : playerModel.cards[i],
+                                      info: playerModel.heardInfo?.elementAt(i),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              secondaryBackground: Container(
-                                alignment: Alignment.bottomCenter,
-                                color: Colors.red,
-                                child: FittedBox(
-                                  child: Text(
-                                    "Put",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 36),
-                                  ),
-                                ),
-                              ),
-                              child: game.Card(
-                                card: playerModel.cards[i],
-                                info: playerModel.heardInfo?.elementAt(i),
-                              ),
-                            ),
                           ),
                           Flexible(flex: 1, child: SizedBox.expand()),
                         ],

@@ -50,7 +50,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   BoardModel board;
   @override
   void initState() {
@@ -64,17 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     var types = CardTypesModel(5);
@@ -84,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     types.addColor([3, 2, 2, 2, 1]);
     types.addColor([3, 2, 2, 2, 1]);
     var info = HeardInfoModel(types);
-    board.giveInfo(0, 1);
+    //board.giveInfo(0, 1);
     //info.heardColor(2, false);
     // info.heardColor(4, false);
     // info.heardColor(1, false);
@@ -104,33 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            Container(
-              width: 100,
-              height: 140,
-              child: game.Card(
-                card: CardModel(colorIndex: 1, value: 4),
-                info: info,
+            for (var i = 0; i < board.players.length; i++)
+              PlayerCards(
+                board: board,
+                myId: 1,
+                playerId: i,
               ),
-            ),
-            PlayerCards(
-              board: board,
-              myId: 0,
-              playerId: 0,
-            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
