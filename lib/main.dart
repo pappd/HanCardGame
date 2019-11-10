@@ -1,6 +1,8 @@
+import 'package:card_game/model/board_model.dart';
 import 'package:card_game/model/card_model.dart';
 import 'package:card_game/model/card_types_model.dart';
 import 'package:card_game/model/heard_info_model.dart';
+import 'package:card_game/player_cards.dart';
 import 'package:flutter/material.dart';
 import 'card.dart' as game;
 
@@ -49,6 +51,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  BoardModel board;
+  @override
+  void initState() {
+    var types = CardTypesModel(5);
+    types.addColor([3, 2, 2, 2, 1]);
+    types.addColor([3, 2, 2, 2, 1]);
+    types.addColor([3, 2, 2, 2, 1]);
+    types.addColor([3, 2, 2, 2, 1]);
+    types.addColor([3, 2, 2, 2, 1]);
+    board = BoardModel(5, 5, types);
+    super.initState();
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -70,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     types.addColor([3, 2, 2, 2, 1]);
     types.addColor([3, 2, 2, 2, 1]);
     var info = HeardInfoModel(types);
+    board.giveInfo(0, 1);
     //info.heardColor(2, false);
     // info.heardColor(4, false);
     // info.heardColor(1, false);
@@ -103,6 +118,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 card: CardModel(colorIndex: 1, value: 4),
                 info: info,
               ),
+            ),
+            PlayerCards(
+              playerModel: board.players[0],
             ),
           ],
         ),
