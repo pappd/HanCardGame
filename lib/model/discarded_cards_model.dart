@@ -25,9 +25,11 @@ class DiscardedCardsModel {
 
   List<CardModel> withMyInfo(List<CardModel> cards, HeardInfoModel heardInfo) {
     var possibleCard = [
-      for (var color = 0; color < cards.length; color++)
-        for (var value = 0; value < _cards[color].length; value++)
-          [cardTypes.distribution[color][value] - _cards[color][value]],
+      for (var color = 0; color < _cards.length; color++)
+        [
+          for (var value = 0; value < _cards[color].length; value++)
+            cardTypes.distribution[color][value] - _cards[color][value]
+        ],
     ];
 
     for (var card in cards) {
@@ -35,7 +37,9 @@ class DiscardedCardsModel {
     }
 
     for (var c in heardInfo.getColors(false)) {
-      possibleCard[c].forEach((e) => e = 0);
+      for (var i = 0; i < possibleCard[c].length; i++) {
+        possibleCard[c][i] = 0;
+      }
     }
 
     for (var v in heardInfo.getValues(false)) {
@@ -46,8 +50,10 @@ class DiscardedCardsModel {
     var possibleCardList = <CardModel>[];
 
     for (var color = 0; color < possibleCard.length; color++) {
-      for (var value = 1; value <= possibleCard[color].length; value++) {
-        possibleCardList.add(CardModel(colorIndex: color, value: value));
+      for (var value = 1; value < possibleCard[color].length + 1; value++) {
+        if (possibleCard[color][value - 1] != 0) {
+          possibleCardList.add(CardModel(colorIndex: color, value: value));
+        }
       }
     }
 
