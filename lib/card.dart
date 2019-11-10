@@ -16,64 +16,93 @@ class Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Flexible(
-          flex: 4,
-          child: Container(
-            color: card == null ? Colors.grey[700] : colors[card.colorIndex],
-            padding: EdgeInsets.all(5),
-            child: FittedBox(
-              child: Text(
-                "${card?.value ?? " "}",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 236,
-                ),
-              ),
-            ),
-          ),
+    return Container(
+      width: 60,
+      height: 80,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 3,
         ),
-        if ((info?.getColors(true)?.length ?? 0) <
-            (info?.possibleColors?.length ?? 0))
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      child: Column(
+        children: <Widget>[
           Flexible(
-            flex: 1,
-            child: Column(
+            flex: 4,
+            child: Row(
               children: <Widget>[
-                for (var c in info.getColors(true))
-                  Expanded(
-                    child: Container(
-                      color: colors[c],
+                Flexible(
+                  flex: 4,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: card == null
+                          ? Colors.grey[700]
+                          : colors[card.colorIndex],
+                      border: Border(
+                        bottom: BorderSide(color: Colors.black, width: 2),
+                        right: BorderSide(color: Colors.black, width: 2),
+                      ),
                     ),
-                  )
-              ],
-            ),
-          ),
-        if ((info?.getValues(true)?.length ?? 0) <
-            (info?.possibleValues?.length ?? 0))
-          Flexible(
-            flex: 1,
-            child: Column(
-              children: <Widget>[
-                for (var c in info.getValues(true))
-                  Expanded(
-                    child: FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: Text(
-                        "${c + 1}",
-                        style: TextStyle(
-                          backgroundColor: Colors.grey[700],
-                          color: Colors.white,
-                          fontSize: 136,
+                    padding: EdgeInsets.all(5),
+                    child: Center(
+                      child: FittedBox(
+                        child: Text(
+                          "${card?.value ?? " "}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 236,
+                          ),
                         ),
                       ),
                     ),
-                  )
+                  ),
+                ),
+                if ((info?.getColors(true)?.length ?? 0) <
+                    (info?.possibleColors?.length ?? 0))
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: <Widget>[
+                        for (var c in info.getColors(true))
+                          Expanded(
+                            child: Container(
+                              color: colors[c],
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
-      ],
+          if ((info?.getValues(true)?.length ?? 0) <
+              (info?.possibleValues?.length ?? 0))
+            Flexible(
+              flex: 1,
+              child: Container(
+                color: Colors.grey[700],
+                child: Row(
+                  children: <Widget>[
+                    for (var c in info.getValues(true))
+                      Expanded(
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Text(
+                            "${c + 1}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 136,
+                            ),
+                          ),
+                        ),
+                      )
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

@@ -5,11 +5,13 @@ class CardTypesModel {
   ///Default Colors for index
   static const defaultColors = <Color>[
     Colors.amber,
-    Colors.red,
-    Colors.greenAccent,
-    Colors.yellowAccent,
+    Colors.redAccent,
     Colors.blueAccent,
+    Colors.green,
+    Colors.white,
+    Colors.yellowAccent,
     Colors.cyanAccent,
+    Colors.yellowAccent,
   ];
 
   ///Number of each card types
