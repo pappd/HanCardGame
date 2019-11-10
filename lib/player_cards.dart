@@ -12,23 +12,37 @@ class PlayerCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(seconds: 1),
+      curve: Curves.elasticIn,
       width: 390,
-      height: 100,
+      height: 120,
       decoration: BoxDecoration(
-        color: activeId == playerModel.id
-            ? Colors.lightBlueAccent
-            : Colors.grey[400],
+        color: activeId == playerModel.id ? Colors.blue : Colors.grey[400],
         border: Border.all(
           width: 3,
         ),
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Flexible(
-            flex: 1,
-            child: Text(playerModel.name ?? "no name"),
+            flex: 3,
+            child: Container(
+              margin: EdgeInsets.fromLTRB(16, 2, 10, 3),
+              child: FittedBox(
+                child: Text(
+                  myId == playerModel.id ? "Me" : playerModel.name ?? "no name",
+                  style: TextStyle(
+                      color: activeId == playerModel.id
+                          ? Colors.white
+                          : Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
           ),
           Flexible(
             flex: 10,

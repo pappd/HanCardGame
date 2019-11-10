@@ -121,6 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             PlayerCards(
               playerModel: board.players[0],
+              myId: 0,
+              activeId: 1,
             ),
           ],
         ),
