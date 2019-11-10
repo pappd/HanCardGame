@@ -21,13 +21,14 @@ class Card extends StatelessWidget {
         Flexible(
           flex: 4,
           child: Container(
-            color: colors[card.colorIndex],
+            color: card == null ? Colors.grey[700] : colors[card.colorIndex],
             padding: EdgeInsets.all(5),
             child: FittedBox(
               child: Text(
-                "${card.value}",
+                "${card?.value ?? " "}",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                   fontSize: 236,
                 ),
               ),
@@ -58,12 +59,13 @@ class Card extends StatelessWidget {
                 for (var c in info.getValues(true))
                   Expanded(
                     child: FittedBox(
+                      fit: BoxFit.fitHeight,
                       child: Text(
                         "${c + 1}",
                         style: TextStyle(
                           backgroundColor: Colors.grey[700],
                           color: Colors.white,
-                          fontSize: 36,
+                          fontSize: 136,
                         ),
                       ),
                     ),
