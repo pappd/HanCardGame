@@ -77,10 +77,10 @@ class BoardModel {
       } else {
         players[playerId]
             .heardInfo[i]
-            .heardValue(value, value == players[playerId].cards[i].value);
+            .heardValue(value - 1, value == players[playerId].cards[i].value);
       }
     }
-    activePlayerId = (activePlayerId + 1) % (playersNumber + 1);
+    //activePlayerId = (activePlayerId + 1) % (playersNumber + 1);
     _isFinished();
   }
 
