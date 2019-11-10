@@ -60,7 +60,7 @@ class BoardModel {
     if (deck.length > 0) {
       _draw(playerId);
     }
-    activePlayerId = (activePlayerId + 1) % (playersNumber + 1);
+    activePlayerId = activePlayerId % playersNumber;
     _isFinished();
   }
 
@@ -80,7 +80,7 @@ class BoardModel {
             .heardValue(value - 1, value == players[playerId].cards[i].value);
       }
     }
-    //activePlayerId = (activePlayerId + 1) % (playersNumber + 1);
+    //activePlayerId = activePlayerId  % playersNumber ;
     _isFinished();
   }
 
