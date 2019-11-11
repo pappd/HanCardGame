@@ -71,10 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
     var scoredCardModel = ScoredCardModel(board.cardTypes,
         colorCompleted: () {}, wrongCardWasAdded: () {});
     scoredCardModel.add(CardModel(value: 1, colorIndex: 0));
-    //scoredCardModel.add(CardModel(value: 1, colorIndex: 1));
-    //scoredCardModel.add(CardModel(value: 1, colorIndex: 2));
-    //scoredCardModel.add(CardModel(value: 1, colorIndex: 3));
-    //scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
+    scoredCardModel.add(CardModel(value: 1, colorIndex: 1));
+    scoredCardModel.add(CardModel(value: 1, colorIndex: 2));
+    scoredCardModel.add(CardModel(value: 1, colorIndex: 3));
+    scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             game.Table(
               scoredCardModel,
-              width: 50,
-              height: 70,
+              width: 300,
+              height: 170,
             ),
 
             Container(

@@ -24,24 +24,15 @@ class Table extends StatelessWidget {
     final double widthLine1Narrow = width * 1.1 / scoredCard.cards.length;
     final double widthLine1 = width * 0.9 / scoredCard.cards.length;
     final double heightLine2Narrow = height * 1.1 / 2;
-    final double heightLine2 = height * 0.9 / 2;
     final heights = <double>[
       min(widthLine1Narrow / cardWidth * cardHeight, height),
       min(widthLine1 / cardWidth * cardHeight, height),
       heightLine2Narrow,
-      heightLine2,
     ];
 
     //There is enough place horizontally for space
-    if (widthLine1 > cardWidth ||
-        widthLine1 >= widthLine1Narrow ||
-        heightLine2Narrow >= heights[0] * 0.9) {
+    if (widthLine1 > cardWidth || widthLine1 >= widthLine1Narrow) {
       heights[0] = 0;
-    }
-
-    //There is enough place vertically for space
-    if (heightLine2 > cardHeight || heightLine2 >= heightLine2Narrow) {
-      heights[2] = 0;
     }
 
     final calculatedCardHeight = heights.reduce(max);
