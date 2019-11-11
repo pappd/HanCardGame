@@ -11,6 +11,8 @@ class Table extends StatelessWidget {
   final double height;
   final cardWidth;
   final cardHeight;
+  final int helpToken;
+  final int lifeToken;
   const Table(
     this.scoredCard, {
     Key key,
@@ -18,6 +20,8 @@ class Table extends StatelessWidget {
     this.height = 100,
     this.cardWidth = 60,
     this.cardHeight = 80,
+    this.helpToken = 4,
+    this.lifeToken = 7,
   }) : super(key: key);
 
   @override
@@ -36,10 +40,69 @@ class Table extends StatelessWidget {
       heights[0] = 0;
     }
 
-    final calculatedCardHeight = heights.reduce(max);
+    final calculatedCardHeight = scoredCard.cards.length < 4
+        ? min(width / (scoredCard.cards.length + 1) / cardWidth * cardHeight,
+            height)
+        : heights.reduce(max);
+
     final calculatedCardWidth = min(
         calculatedCardHeight / cardHeight * cardWidth,
         2 * width * 0.9 / scoredCard.cards.length);
+
+    if (scoredCard.cards.length < 4) {
+      return Container(
+        width: width,
+        height: height,
+        child: Container(
+          width: width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              for (var i = 0; i < scoredCard.cards.length; i++)
+                Container(
+                    width: calculatedCardWidth,
+                    height: calculatedCardHeight,
+                    child: Card(card: scoredCard.cards[i])),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: material.Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(200)),
+                    ),
+                    width: calculatedCardWidth / 2,
+                    height: calculatedCardWidth / 2,
+                    child: FittedBox(
+                        child: Text(
+                      "$helpToken",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: material.Colors.white),
+                    )),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: material.Colors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(200)),
+                    ),
+                    width: calculatedCardWidth / 2,
+                    height: calculatedCardWidth / 2,
+                    child: FittedBox(
+                        child: Text(
+                      "$lifeToken",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: material.Colors.white),
+                    )),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     final double tokenSize = min(
         heights.indexOf(calculatedCardHeight) < 2
@@ -62,7 +125,7 @@ class Table extends StatelessWidget {
           height: tokenSize,
           child: FittedBox(
               child: Text(
-            "4",
+            "$helpToken",
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: material.Colors.white),
           )),
@@ -80,7 +143,7 @@ class Table extends StatelessWidget {
           height: tokenSize,
           child: FittedBox(
               child: Text(
-            "7",
+            "$lifeToken",
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: material.Colors.white),
           )),

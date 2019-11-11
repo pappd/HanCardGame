@@ -86,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             game.Table(
               scoredCardModel,
-              width: 310,
-              height: 70,
+              width: 390,
+              height: 190,
             ),
 
             Container(
