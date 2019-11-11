@@ -2,10 +2,12 @@ import 'package:card_game/model/board_model.dart';
 import 'package:card_game/model/card_model.dart';
 import 'package:card_game/model/card_types_model.dart';
 import 'package:card_game/model/heard_info_model.dart';
+import 'package:card_game/model/scored_card_model.dart';
 import 'package:card_game/player_cards.dart';
 import 'package:card_game/players.dart';
 import 'package:flutter/material.dart';
-import 'card.dart' as game;
+import 'card.dart' as gamee;
+import 'table.dart' as game;
 
 void main() => runApp(MyApp());
 
@@ -66,25 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var types = CardTypesModel(5);
-    types.addColor([3, 2, 2, 2, 1]);
-    types.addColor([3, 2, 2, 2, 1]);
-    types.addColor([3, 2, 2, 2, 1]);
-    types.addColor([3, 2, 2, 2, 1]);
-    types.addColor([3, 2, 2, 2, 1]);
-    var info = HeardInfoModel(types);
-    //board.giveInfo(0, 1);
-    //info.heardColor(2, false);
-    // info.heardColor(4, false);
-    // info.heardColor(1, false);
-    // info.heardColor(2, false);
-    info.heardColor(1, true);
-    info.heardValue(4, false);
-    //info.heardValue(3, false);
-    info.heardValue(2, false);
-    info.heardValue(1, false);
-    info.heardValue(0, false);
-    info.heardValue(4, false);
+    var scoredCardModel = ScoredCardModel(board.cardTypes,
+        colorCompleted: () {}, wrongCardWasAdded: () {});
+    scoredCardModel.add(CardModel(value: 1, colorIndex: 0));
+    //scoredCardModel.add(CardModel(value: 1, colorIndex: 1));
+    //scoredCardModel.add(CardModel(value: 1, colorIndex: 2));
+    //scoredCardModel.add(CardModel(value: 1, colorIndex: 3));
+    //scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -93,10 +83,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            game.Table(
+              scoredCardModel,
+              width: 50,
+              height: 70,
+            ),
+
             Container(
               width: 390,
-              height: 674,
-              child: Players(board, 0),
+              height: 374,
+              child: Players(board, 1),
             ),
             // for (var i = 0; i < board.players.length; i++)
             //   PlayerCards(
