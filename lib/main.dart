@@ -3,6 +3,7 @@ import 'package:card_game/model/card_model.dart';
 import 'package:card_game/model/card_types_model.dart';
 import 'package:card_game/model/heard_info_model.dart';
 import 'package:card_game/player_cards.dart';
+import 'package:card_game/players.dart';
 import 'package:flutter/material.dart';
 import 'card.dart' as game;
 
@@ -90,14 +91,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            for (var i = 0; i < board.players.length; i++)
-              PlayerCards(
-                board: board,
-                myId: 1,
-                playerId: i,
-              ),
+            Container(
+              width: 390,
+              height: 674,
+              child: Players(board, 0),
+            ),
+            // for (var i = 0; i < board.players.length; i++)
+            //   PlayerCards(
+            //     board: board,
+            //     myId: 1,
+            //     playerId: i,
+            //   ),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
