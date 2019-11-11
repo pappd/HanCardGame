@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     scoredCardModel.add(CardModel(value: 1, colorIndex: 2));
     scoredCardModel.add(CardModel(value: 1, colorIndex: 3));
     scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
+    scoredCardModel.add(CardModel(value: 1, colorIndex: 5));
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -85,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             game.Table(
               scoredCardModel,
-              width: 300,
-              height: 170,
+              width: 310,
+              height: 70,
             ),
 
             Container(
