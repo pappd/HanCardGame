@@ -68,14 +68,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var scoredCardModel = ScoredCardModel(board.cardTypes,
-        colorCompleted: () {}, wrongCardWasAdded: () {});
-    scoredCardModel.add(CardModel(value: 1, colorIndex: 0));
-    scoredCardModel.add(CardModel(value: 1, colorIndex: 1));
-    scoredCardModel.add(CardModel(value: 1, colorIndex: 2));
-    scoredCardModel.add(CardModel(value: 1, colorIndex: 3));
-    scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
-    scoredCardModel.add(CardModel(value: 1, colorIndex: 5));
+    // var scoredCardModel = ScoredCardModel(board.cardTypes,
+    //     colorCompleted: () {}, wrongCardWasAdded: () {});
+    // scoredCardModel.add(CardModel(value: 1, colorIndex: 0));
+    // scoredCardModel.add(CardModel(value: 1, colorIndex: 1));
+    // scoredCardModel.add(CardModel(value: 1, colorIndex: 2));
+    // scoredCardModel.add(CardModel(value: 1, colorIndex: 3));
+    // scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
+    // scoredCardModel.add(CardModel(value: 1, colorIndex: 5));
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -85,15 +85,17 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             game.Table(
-              scoredCardModel,
+              board.scoredCard,
+              lifeToken: board.lifeToken,
+              helpToken: board.helpToken,
               width: 390,
-              height: 190,
+              height: 160,
             ),
 
             Container(
               width: 390,
-              height: 374,
-              child: Players(board, 1),
+              height: 500,
+              child: Players(board, 3),
             ),
             // for (var i = 0; i < board.players.length; i++)
             //   PlayerCards(

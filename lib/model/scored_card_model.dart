@@ -50,6 +50,17 @@ class ScoredCardModel {
   ///Getter for[_scores]
   List<int> get scores => _scores;
 
+  ///Getter for highest scored card for each color
+  List<CardModel> get scoredCards {
+    var cards = <CardModel>[];
+    for (var color = 0; color < _scores.length; color++) {
+      if (_scores[color] > 0) {
+        cards.add(CardModel(colorIndex: color, value: _scores[color]));
+      }
+    }
+    return cards;
+  }
+
   ///Getter for every scored card
   List<CardModel> get cards {
     var cards = <CardModel>[];

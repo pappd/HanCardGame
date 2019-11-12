@@ -92,6 +92,7 @@ class BoardModel {
       }
       seenCard.addAll(player.cards);
     }
+    seenCard.addAll(scoredCard.cards);
     return discardedCards.withMyInfo(
         seenCard, players[playerId].heardInfo[cardIndex]);
   }

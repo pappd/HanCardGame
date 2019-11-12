@@ -26,8 +26,8 @@ class Table extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double widthLine1Narrow = width * 1.1 / scoredCard.cards.length;
-    final double widthLine1 = width * 0.9 / scoredCard.cards.length;
+    final double widthLine1Narrow = width * 1.1 / scoredCard.scoredCards.length;
+    final double widthLine1 = width * 0.9 / scoredCard.scoredCards.length;
     final double heightLine2Narrow = height * 1.1 / 2;
     final heights = <double>[
       min(widthLine1Narrow / cardWidth * cardHeight, height * 0.8),
@@ -40,16 +40,20 @@ class Table extends StatelessWidget {
       heights[0] = 0;
     }
 
-    final calculatedCardHeight = scoredCard.cards.length < 4
-        ? min(width / (scoredCard.cards.length + 1) / cardWidth * cardHeight,
+    final calculatedCardHeight = scoredCard.scoredCards.length < 4
+        ? min(
+            width /
+                (scoredCard.scoredCards.length + 1) /
+                cardWidth *
+                cardHeight,
             height)
         : heights.reduce(max);
 
     final calculatedCardWidth = min(
         calculatedCardHeight / cardHeight * cardWidth,
-        2 * width * 0.9 / scoredCard.cards.length);
+        2 * width * 0.9 / scoredCard.scoredCards.length);
 
-    if (scoredCard.cards.length < 4) {
+    if (scoredCard.scoredCards.length < 4) {
       return Container(
         width: width,
         height: height,
@@ -58,11 +62,11 @@ class Table extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              for (var i = 0; i < scoredCard.cards.length; i++)
+              for (var i = 0; i < scoredCard.scoredCards.length; i++)
                 Container(
                     width: calculatedCardWidth,
                     height: calculatedCardHeight,
-                    child: Card(card: scoredCard.cards[i])),
+                    child: Card(card: scoredCard.scoredCards[i])),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -107,7 +111,7 @@ class Table extends StatelessWidget {
     final double tokenSize = min(
         heights.indexOf(calculatedCardHeight) < 2
             ? (height - calculatedCardHeight) * 0.96
-            : scoredCard.cards.length > 5
+            : scoredCard.scoredCards.length > 5
                 ? height * 0.18
                 : (width - 2 * calculatedCardWidth) * 0.3,
         calculatedCardHeight * 0.5);
@@ -157,14 +161,14 @@ class Table extends StatelessWidget {
         height: height,
         child: Stack(
           children: <Widget>[
-            for (var i = 0; i < scoredCard.cards.length; i++)
+            for (var i = 0; i < scoredCard.scoredCards.length; i++)
               Positioned(
                 left: i * calculatedCardWidth * 0.88,
                 top: 0,
                 child: Container(
                   width: calculatedCardWidth,
                   height: calculatedCardHeight,
-                  child: Card(card: scoredCard.cards[i]),
+                  child: Card(card: scoredCard.scoredCards[i]),
                 ),
               ),
             ...tokens,
@@ -176,27 +180,29 @@ class Table extends StatelessWidget {
     final cardsOnTop = <Widget>[
       for (var i = 0;
           i <
-              scoredCard.cards.length /
+              scoredCard.scoredCards.length /
                   (heights.indexOf(calculatedCardHeight) < 2 ? 1 : 2);
           i++)
         Container(
             width: calculatedCardWidth,
             height: calculatedCardHeight,
-            child: Card(card: scoredCard.cards[i])),
+            child: Card(card: scoredCard.scoredCards[i])),
     ];
 
     final cardsOnBottom = <Widget>[
-      if (scoredCard.cards.length - cardsOnTop.length > 2) SizedBox(width: 10),
-      for (var i = (scoredCard.cards.length /
+      if (scoredCard.scoredCards.length - cardsOnTop.length > 2)
+        SizedBox(width: 10),
+      for (var i = (scoredCard.scoredCards.length /
                   (heights.indexOf(calculatedCardHeight) < 2 ? 1 : 2))
               .ceil();
-          i < scoredCard.cards.length;
+          i < scoredCard.scoredCards.length;
           i++)
         Container(
             width: calculatedCardWidth,
             height: calculatedCardHeight,
-            child: Card(card: scoredCard.cards[i])),
-      if (scoredCard.cards.length - cardsOnTop.length > 2) SizedBox(width: 10),
+            child: Card(card: scoredCard.scoredCards[i])),
+      if (scoredCard.scoredCards.length - cardsOnTop.length > 2)
+        SizedBox(width: 10),
     ];
 
     return Container(
