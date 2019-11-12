@@ -20,10 +20,12 @@ class BoardModel {
   ScoredCardModel scoredCard;
   final List<PlayerModel> players;
 
+  final Function uiSetState;
+
   var activePlayerId = 0;
 
   BoardModel(this.playersNumber, this.cardsInHandNumber, this.cardTypes,
-      {this.lifeToken = 3, this.maxHelpToken = 10})
+      {this.lifeToken = 3, this.maxHelpToken = 8, this.uiSetState})
       : deck = DeckModel(cardTypes),
         helpToken = maxHelpToken,
         discardedCards = DiscardedCardsModel(cardTypes),
@@ -100,6 +102,9 @@ class BoardModel {
   void _isFinished([bool forced = false]) {
     if (forced || (players[activePlayerId].cards.isEmpty && helpToken == 0)) {
       activePlayerId = -1;
+    }
+    if (uiSetState != null) {
+      uiSetState();
     }
   }
 

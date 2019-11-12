@@ -37,15 +37,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -54,6 +45,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   BoardModel board;
+  int myId = 0;
   @override
   void initState() {
     var types = CardTypesModel(5);
@@ -62,8 +54,18 @@ class _MyHomePageState extends State<MyHomePage> {
     types.addColor([3, 2, 2, 2, 1]);
     types.addColor([3, 2, 2, 2, 1]);
     types.addColor([3, 2, 2, 2, 1]);
-    board = BoardModel(5, 5, types);
+    board = BoardModel(5, 5, types, uiSetState: uiRefresh);
     super.initState();
+  }
+
+  void uiRefresh() {
+    setState(() {
+      Future.delayed(Duration(seconds: 2)).then((_) {
+        setState(() {
+          myId = board.activePlayerId;
+        });
+      });
+    });
   }
 
   @override
@@ -77,13 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // scoredCardModel.add(CardModel(value: 1, colorIndex: 4));
     // scoredCardModel.add(CardModel(value: 1, colorIndex: 5));
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 40),
             game.Table(
               board.scoredCard,
               lifeToken: board.lifeToken,
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 390,
               height: 500,
-              child: Players(board, 3),
+              child: Players(board, myId),
             ),
             // for (var i = 0; i < board.players.length; i++)
             //   PlayerCards(

@@ -20,7 +20,7 @@ class PlayerCards extends StatelessWidget {
       enabled:
           board.helpToken > 0 && activeId == myId && myId != playerModel.id,
       actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 1 / board.cardTypes.colors.length,
+      actionExtentRatio: 1 / (board.cardTypes.colors.length + 1),
       actions: <Widget>[
         for (var i = 0; i < board.cardTypes.colors.length; i++)
           IconSlideAction(

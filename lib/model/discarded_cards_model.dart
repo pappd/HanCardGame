@@ -15,8 +15,12 @@ class DiscardedCardsModel {
 
   ///Constract a counter class for discarded cards
   DiscardedCardsModel(this.cardTypes)
-      : _cards = List<List<int>>.filled(cardTypes.distribution.length,
-            List<int>.filled(cardTypes.distribution[0].length, 0));
+      : _cards = [
+          for (var i = 0; i < cardTypes.distribution.length; i++)
+            [for (var j = 0; j < cardTypes.distribution[i].length; j++) 0]
+        ];
+  // : _cards = List<List<int>>.filled(cardTypes.distribution.length,
+  //       List<int>.filled(cardTypes.distribution[0].length, 0));
 
   ///If a card was discarded by a player,it is moved to this class with this function
   void addDisCardedCard(CardModel card) {
